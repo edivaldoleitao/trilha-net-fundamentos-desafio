@@ -5,16 +5,29 @@ Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 decimal precoInicial = 0;
 decimal precoPorHora = 0;
+int limiteVagas = 0;
+int limiteVagasEspeciais = 0;
+
 
 Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
+                    "Digite o preço inicial:");
+
+precoInicial = ConverterDecimal();
 
 Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
 
+precoPorHora = ConverterDecimal();
+
+Console.WriteLine("Agora digite o limite de vagas comuns:");
+
+limiteVagas = ConverterInteiro();
+
+Console.WriteLine("Agora digite a quantidade de vagas especiais:");
+
+limiteVagasEspeciais = ConverterInteiro();
+    
 // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
+Estacionamento es = new Estacionamento(precoInicial, precoPorHora, limiteVagas, limiteVagasEspeciais);
 
 string opcao = string.Empty;
 bool exibirMenu = true;
@@ -29,7 +42,9 @@ while (exibirMenu)
     Console.WriteLine("3 - Listar veículos");
     Console.WriteLine("4 - Encerrar");
 
-    switch (Console.ReadLine())
+    opcao = Console.ReadLine();
+
+    switch (opcao)
     {
         case "1":
             es.AdicionarVeiculo();
@@ -57,3 +72,36 @@ while (exibirMenu)
 }
 
 Console.WriteLine("O programa se encerrou");
+
+//tenta capturar um valor válido do decimal, enquanto não for, fica me loop
+static decimal ConverterDecimal() {
+
+    decimal valor;
+    while(true) {
+        if(!Decimal.TryParse(Console.ReadLine(),out valor) || valor <= 0)
+        {
+            Console.WriteLine("digite valor válido de preço ");
+        }
+        else {
+            break;
+        };
+    }
+    return valor;
+}
+
+//tenta capturar um valor válido do inteiro, enquanto não for, fica me loop
+static int ConverterInteiro() 
+{
+    int valor;
+    while(true)
+    {
+        if (!int.TryParse(Console.ReadLine(),out valor) || valor <= 0)
+        {
+            Console.WriteLine("digite um valor válido para o limite de vagas");
+        }
+        else {
+            break;
+        }
+    }
+    return valor;
+};
