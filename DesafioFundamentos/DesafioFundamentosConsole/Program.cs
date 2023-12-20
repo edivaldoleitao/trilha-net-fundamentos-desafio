@@ -1,5 +1,5 @@
 ﻿using DesafioFundamentos.Models;
-
+// adicioar limite de vagas, criar classe carro com placa e tipo idoso, e limitar as vagas especiais
 // Coloca o encoding para UTF8 para exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
