@@ -26,7 +26,6 @@ namespace DesafioFundamentos.Models
 
         public void AdicionarVeiculo()
         {
-            // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
 
             bool op = true;
             string placa;
@@ -43,8 +42,6 @@ namespace DesafioFundamentos.Models
                 }
             }
 
-
-
             while(op)
             {
                 Console.WriteLine("O carro tem direito a vaga especial ?\ny/n");
@@ -53,17 +50,35 @@ namespace DesafioFundamentos.Models
                switch (opcao.ToUpper())
                {
                 case "Y":
-                    veiculos.Add(new Carro(placa,especial));
+                    int vagasRestantes = limiteVagas - veiculos.Where(carro => carro.TipoCarro.Equals(especial)).Count();
+
+                    if(vagasRestantes >0) 
+                    {
+                        veiculos.Add(new Carro(placa,especial));
+                    }
+                    else
+                    {
+                        Console.WriteLine("não existem vagas do tipo Especial disponiveis");
+                    }
                     op = false;
                     break;
 
                 case "N":
-                    veiculos.Add(new Carro(placa,comum));
+                    int vagasRestantesEspecial = limiteVagasEspeciais - veiculos.Where(carro => carro.TipoCarro.Equals(comum)).Count();
+
+                    if(vagasRestantesEspecial > 0) 
+                    {
+                        veiculos.Add(new Carro(placa,comum));
+                    }
+                    else
+                    {
+                        Console.WriteLine("não existem vagas do tipo comum disponiveis");
+                    }
                     op = false;
                     break;
                 default:
                     Console.WriteLine("digite uma opção válida");
-                break;
+                    break;
                }
             }
             
@@ -117,12 +132,48 @@ namespace DesafioFundamentos.Models
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
                 foreach (var carro in veiculos)
                 {
-                    Console.WriteLine(carro.Placa);
+                   string tipo = carro.TipoCarro.Equals(comum) ? "comum" : "especial";
+                   Console.WriteLine($" PLACA: {carro.Placa} - TIPO: {tipo}");
                 }
             }
             else
             {
                 Console.WriteLine("Não há veículos estacionados.");
+            }
+        }
+        //implementação mostrar numero de vagas restantes
+
+        public void MostrarVagas()
+        {
+            int vagasRestantes=0;
+            int vagasRestantesEspecial=0;
+
+            vagasRestantes = limiteVagas - veiculos.Where(carro => carro.TipoCarro.Equals(comum)).Count();
+
+            vagasRestantesEspecial = limiteVagasEspeciais - veiculos.Where(carro => carro.TipoCarro.Equals(especial)).Count();
+
+            Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);   
+        }
+
+        public void GravarDados()
+        {
+            try
+            {
+                StreamWriter sw = new StreamWriter("Arquivos//carros.txt");
+                
+                foreach (var carro in veiculos)
+                {
+                   sw.WriteLine(carro.Placa + "|" + carro.TipoCarro); 
+                }     
+                sw.Close();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Processo de gravação finalizado.");
             }
         }
     }
