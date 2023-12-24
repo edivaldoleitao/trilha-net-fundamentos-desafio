@@ -1,4 +1,5 @@
 using System.Reflection.Metadata.Ecma335;
+using System.Text.RegularExpressions;
 using DesafioFundamentosConsole.Models;
 
 namespace DesafioFundamentos.Models
@@ -8,20 +9,24 @@ namespace DesafioFundamentos.Models
         private decimal precoInicial = 0;
         private decimal precoPorHora = 0;
         private List<Carro> veiculos = new List<Carro>();
-        private int limiteVagas;
-        private int limiteVagasEspeciais;
+        private int quantidadeVagas=0;
+        private int quantidadeVagasEspeciais=0;
         private const char comum = 'C';
         private const char especial = 'E';
 
-        public int LimiteVagas { get=> limiteVagas; }
+        public int QuantidadeVagas { get=> quantidadeVagas; }
 
-        public int LimiteVagasEpeciais { get=> limiteVagasEspeciais; }
-        public Estacionamento(decimal precoInicial, decimal precoPorHora, int limiteVagas, int limiteVagasEspeciais)
+        public int QuantidadeVagasEpeciais { get=> quantidadeVagasEspeciais; }
+        public Estacionamento(decimal precoInicial, decimal precoPorHora, int quantidadeVagas, int quantidadeVagasEspeciais)
         {
             this.precoInicial = precoInicial;
             this.precoPorHora = precoPorHora;
-            this.limiteVagas = limiteVagas;
-            this.limiteVagasEspeciais = limiteVagasEspeciais;
+            this.quantidadeVagas = quantidadeVagas;
+            this.quantidadeVagasEspeciais = quantidadeVagasEspeciais;
+        }
+
+        public Estacionamento(){
+
         }
 
         public void AdicionarVeiculo()
@@ -33,53 +38,74 @@ namespace DesafioFundamentos.Models
             {
                 Console.WriteLine("Digite a placa do veículo para estacionar:");
                 placa = Console.ReadLine();
+                //verifica se existe a mesma placa cadastrada no sistema
                 if (!veiculos.Any(x => x.Placa.ToUpper() == placa.ToUpper()))
                 {
-                    break;
+                    if(ValidarPadraoPlaca(placa))
+                    {
+                        break;
+                    }
+                    else{
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Padrão inválido para placa !");
+                        Console.ResetColor();
+                    }
+                    
                 }
                 else{
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("A placa já foi cadastrada!");
+                    Console.ResetColor();
                 }
             }
 
             while(op)
             {
-                Console.WriteLine("O carro tem direito a vaga especial ?\ny/n");
+                Console.WriteLine("O carro tem direito a vaga especial ?\nS/N");
                 string opcao = Console.ReadLine();
-
-               switch (opcao.ToUpper())
+               if (opcao.ToUpper().Equals("S"))
                {
-                case "Y":
-                    int vagasRestantes = limiteVagas - veiculos.Where(carro => carro.TipoCarro.Equals(especial)).Count();
+                
+                    
 
-                    if(vagasRestantes >0) 
+                    if(quantidadeVagasEspeciais > 0) 
                     {
+                        quantidadeVagasEspeciais--;
                         veiculos.Add(new Carro(placa,especial));
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("não existem vagas do tipo Especial disponiveis");
+                        Console.ResetColor();
                     }
                     op = false;
                     break;
+               }
+                else if(opcao.ToUpper().Equals("N")){
+                    
 
-                case "N":
-                    int vagasRestantesEspecial = limiteVagasEspeciais - veiculos.Where(carro => carro.TipoCarro.Equals(comum)).Count();
-
-                    if(vagasRestantesEspecial > 0) 
+                    if(quantidadeVagas > 0) 
                     {
+                        quantidadeVagas--;
                         veiculos.Add(new Carro(placa,comum));
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("não existem vagas do tipo comum disponiveis");
+                        Console.ResetColor();
                     }
                     op = false;
                     break;
-                default:
+                }
+                else{
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("digite uma opção válida");
+                    Console.ResetColor();
                     break;
-               }
+                }
+               
             }
             
             
@@ -114,12 +140,15 @@ namespace DesafioFundamentos.Models
                     }
                 }
                 
-
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
+                Console.ResetColor();
             }
             else
-            {
+            {   
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
+                Console.ResetColor();
             }
         }
 
@@ -137,8 +166,9 @@ namespace DesafioFundamentos.Models
                 }
             }
             else
-            {
+            {   Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Não há veículos estacionados.");
+                Console.ResetColor();
             }
         }
         //implementação mostrar numero de vagas restantes
@@ -148,33 +178,112 @@ namespace DesafioFundamentos.Models
             int vagasRestantes=0;
             int vagasRestantesEspecial=0;
 
-            vagasRestantes = limiteVagas - veiculos.Where(carro => carro.TipoCarro.Equals(comum)).Count();
+            vagasRestantes = quantidadeVagas;
 
-            vagasRestantesEspecial = limiteVagasEspeciais - veiculos.Where(carro => carro.TipoCarro.Equals(especial)).Count();
+            vagasRestantesEspecial = quantidadeVagasEspeciais;
 
             Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);   
         }
 
         public void GravarDados()
         {
+            bool opcao = true;
+
+            while (opcao)
+            {
+                Console.WriteLine("Deseja salvar a sessão ?\nS/N");
+                switch(Console.ReadLine().ToUpper()) 
+                {
+                    case "S":
+                        try
+                        {
+                            StreamWriter sw = new StreamWriter("Arquivos//estacionamento.txt");
+                            
+                            //grava os dados sobre as vagas
+                            sw.WriteLine(quantidadeVagas+"|"+quantidadeVagasEspeciais);
+                            // grava os dados dos preços
+                            sw.WriteLine(precoInicial+"|"+precoPorHora);
+                            // grava os dados dos carros
+                            foreach (var carro in veiculos)
+                            {
+                            sw.WriteLine(carro.Placa + "|" + carro.TipoCarro); 
+                            }     
+                            sw.Close();
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("Exception: " + e.Message);
+                        }
+                        finally
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("Processo de gravação finalizado.");
+                            Console.ResetColor();
+                        }
+                        opcao = false;
+                        break;
+
+                    case "N":
+                        opcao = false;
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Opção inválida !");
+                        Console.ResetColor();
+                        break;                    
+                }
+              
+            }
+        }
+
+        public void CarregarDados()
+        {   
             try
             {
-                StreamWriter sw = new StreamWriter("Arquivos//carros.txt");
-                
-                foreach (var carro in veiculos)
+                string[] array = File.ReadAllLines("Arquivos//estacionamento.txt");
+
+                 for (int i = 2; i < array.Length; i++)
                 {
-                   sw.WriteLine(carro.Placa + "|" + carro.TipoCarro); 
-                }     
-                sw.Close();
+                    string[] auxiliar = array[i].Split('|');
+                    string placa = auxiliar[0];
+                    char tipoCarro = auxiliar[1][0];
+                    veiculos.Add(new Carro(placa, tipoCarro));
+                }
+                
+                //carrega a primeira linha do arquivo com as vagas
+                string[] vagas = array[0].Split('|');
+
+                quantidadeVagas = Convert.ToInt32(vagas[0]);
+                quantidadeVagasEspeciais = Convert.ToInt32(vagas[1]);
+
+                // carrega segunda linha para os preços
+                string[] precos = array[1].Split('|');
+
+                precoInicial = Convert.ToInt32(precos[0]);
+                precoPorHora = Convert.ToInt32(precos[1]);
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Console.WriteLine("Exception: " + e.Message);
+                Console.WriteLine("Exception" + e.Message);
             }
-            finally
+        }
+
+        public bool ValidarPadraoPlaca(String placa)
+        {
+            //remove o caracter '-' e os espaços 
+            placa = placa.Replace("-", "").Trim();
+            // verifica se a placa está vazia
+            if (String.IsNullOrEmpty(placa))
             {
-                Console.WriteLine("Processo de gravação finalizado.");
+                return false;
             }
+
+            String padraoPlacaBrasil = @"^[a-zA-Z]{3}[0-9]{4}$";
+            String padraoPlacaMercosul = @"^[a-zA-Z]{3}[0-9]{1}[a-zA-Z]{1}[0-9]{2}$";
+
+            // retorna verdadeiro caso qualquer um dos dois padrões seja atendido
+            return Regex.IsMatch(placa,padraoPlacaBrasil) || Regex.IsMatch(placa,padraoPlacaMercosul);
         }
     }
 }

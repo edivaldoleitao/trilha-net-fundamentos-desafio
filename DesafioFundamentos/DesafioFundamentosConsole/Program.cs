@@ -7,31 +7,41 @@ decimal precoInicial = 0;
 decimal precoPorHora = 0;
 int limiteVagas = 0;
 int limiteVagasEspeciais = 0;
+Estacionamento es;
 
+Console.WriteLine("Deseja carregar a última sessão ?\nS/N");
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
+if (Console.ReadLine().ToUpper().Equals("N"))
+{
+    
+    Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
                     "Digite o preço inicial:");
 
-precoInicial = ConverterDecimal();
+    precoInicial = ConverterDecimal();
 
-Console.WriteLine("Agora digite o preço por hora:");
+    Console.WriteLine("Agora digite o preço por hora:");
 
-precoPorHora = ConverterDecimal();
+    precoPorHora = ConverterDecimal();
 
-Console.WriteLine("Agora digite o limite de vagas comuns:");
+    Console.WriteLine("Agora digite o limite de vagas comuns:");
 
-limiteVagas = ConverterInteiro();
+    limiteVagas = ConverterInteiro();
 
-Console.WriteLine("Agora digite a quantidade de vagas especiais:");
+    Console.WriteLine("Agora digite a quantidade de vagas especiais:");
 
-limiteVagasEspeciais = ConverterInteiro();
-    
-// Instancia a classe Estacionamento, já com os valores obtidos anteriormente
-Estacionamento es = new Estacionamento(precoInicial, precoPorHora, limiteVagas, limiteVagasEspeciais);
+    limiteVagasEspeciais = ConverterInteiro();
 
-string opcao = string.Empty;
+    // Instancia a classe Estacionamento, já com os valores obtidos anteriormente
+    es = new Estacionamento(precoInicial, precoPorHora, limiteVagas, limiteVagasEspeciais);
+}    
+else {
+    // inicia vazio e preenche através do arquivo
+    es = new Estacionamento();
+    es.CarregarDados();
+}
+
+
 bool exibirMenu = true;
-
 // Realiza o loop do menu
 while (exibirMenu)
 {
@@ -43,7 +53,7 @@ while (exibirMenu)
     Console.WriteLine("4 - Encerrar");
     Console.WriteLine("5 - Mostrar vagas Disponíveis");
 
-    opcao = Console.ReadLine();
+    String opcao = Console.ReadLine();
 
     switch (opcao)
     {
