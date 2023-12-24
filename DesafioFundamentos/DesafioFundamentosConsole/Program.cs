@@ -51,7 +51,7 @@ while (exibirMenu)
     Console.WriteLine("2 - Remover veículo");
     Console.WriteLine("3 - Listar veículos");
     Console.WriteLine("4 - Encerrar");
-    Console.WriteLine("5 - Mostrar vagas Disponíveis");
+    Console.WriteLine("5 - Mostrar vagas e Preços");
 
     String opcao = Console.ReadLine();
 
@@ -75,7 +75,7 @@ while (exibirMenu)
             break;
 
         case "5":
-            es.MostrarVagas();
+            es.MostrarVagasEPrecos();
             break;
         default:
             Console.WriteLine("Opção inválida");
@@ -95,7 +95,9 @@ static decimal ConverterDecimal() {
     while(true) {
         if(!Decimal.TryParse(Console.ReadLine(),out valor) || valor <= 0)
         {
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("digite valor válido de preço ");
+            Console.ResetColor();
         }
         else {
             break;
@@ -111,8 +113,10 @@ static int ConverterInteiro()
     while(true)
     {
         if (!int.TryParse(Console.ReadLine(),out valor) || valor <= 0)
-        {
+        {   
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("digite um valor válido para o limite de vagas");
+            Console.ResetColor();
         }
         else {
             break;

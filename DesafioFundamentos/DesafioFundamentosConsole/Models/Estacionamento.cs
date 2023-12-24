@@ -110,7 +110,6 @@ namespace DesafioFundamentos.Models
             
             
         }
-
         public void RemoverVeiculo()
         {
             Console.WriteLine("Digite a placa do veículo para remover:");
@@ -136,6 +135,14 @@ namespace DesafioFundamentos.Models
                 {
                     if (veiculos[i].Placa.Equals(placa))
                     {
+                       if (veiculos[i].TipoCarro.Equals(comum))
+                        {
+                            quantidadeVagas++;
+                        }
+                       else
+                        {
+                            quantidadeVagasEspeciais++;
+                        }                    
                        veiculos.RemoveAt(i); 
                     }
                 }
@@ -173,16 +180,15 @@ namespace DesafioFundamentos.Models
         }
         //implementação mostrar numero de vagas restantes
 
-        public void MostrarVagas()
+        public void MostrarVagasEPrecos()
         {
-            int vagasRestantes=0;
-            int vagasRestantesEspecial=0;
 
-            vagasRestantes = quantidadeVagas;
+            int vagasRestantes = quantidadeVagas;
 
-            vagasRestantesEspecial = quantidadeVagasEspeciais;
+            int vagasRestantesEspecial = quantidadeVagasEspeciais;
 
-            Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);   
+            Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);
+            Console.WriteLine($"Preço inicial: {precoInicial}\nPreço por Hora: {precoPorHora}");   
         }
 
         public void GravarDados()
@@ -235,7 +241,6 @@ namespace DesafioFundamentos.Models
               
             }
         }
-
         public void CarregarDados()
         {   
             try
