@@ -1,12 +1,8 @@
 ## Sistema de Estacionamento (DecolaTech4)🚀
-<p>
-    <a href="https://learn.microsoft.com/en-us/dotnet/csharp/">
-        <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" />
-    </a>&nbsp;&nbsp;
-    <a href="https://learn.microsoft.com/pt-br/dotnet/">
-        <img src=" https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />
-    </a>&nbsp;&nbsp;
-</p>
+
+[![c#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)](https://learn.microsoft.com/en-us/dotnet/csharp/)
+[![c#](https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://learn.microsoft.com/pt-br/dotnet)
+
 
 Este é um sistema simples de gestão de estacionamento em C# que permite cadastrar, remover e listar veículos, além de mostrar informações sobre vagas e preços. O sistema foi desenvolvido para ser executado em um console.
 
