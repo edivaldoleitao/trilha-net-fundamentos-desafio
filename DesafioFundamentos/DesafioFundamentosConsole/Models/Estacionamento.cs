@@ -13,6 +13,7 @@ namespace DesafioFundamentos.Models
         private int quantidadeVagasEspeciais=0;
         private const char comum = 'C'; 
         private const char especial = 'E';
+        private Dictionary<String,DateTime> registroHorarios = new Dictionary<String, DateTime>();
 
         public int QuantidadeVagas { get=> quantidadeVagas; }
 
@@ -158,7 +159,7 @@ namespace DesafioFundamentos.Models
             int vagasRestantesEspecial = quantidadeVagasEspeciais;
 
             Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);
-            Console.WriteLine($"Preço inicial: {precoInicial}\nPreço por Hora: {precoPorHora}");   
+            Console.WriteLine($"Preço inicial: {precoInicial:C}\nPreço por Hora: {precoPorHora:C}");   
         }
 
         public void GravarDados()
@@ -185,14 +186,11 @@ namespace DesafioFundamentos.Models
                             sw.WriteLine(carro.Placa + "|" + carro.TipoCarro); 
                             }     
                             sw.Close();
+                            ExibirMensagem("Processo de gravação finalizado.","success");
                         }
                         catch(Exception e)
                         {
                             Console.WriteLine("Exception: " + e.Message);
-                        }
-                        finally
-                        {
-                            ExibirMensagem("Processo de gravação finalizado.","success");
                         }
                         opcao = false;
                         break;
@@ -277,8 +275,12 @@ namespace DesafioFundamentos.Models
                 default:
                     break;
             }
+        }
 
+        public decimal CalcularTicketEstacionamento()
+        {
 
+            return 1;
         }
     }
 }
