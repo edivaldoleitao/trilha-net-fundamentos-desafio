@@ -43,15 +43,11 @@ namespace DesafioFundamentos.Models
                         break;
                     }
                     else{
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Padrão inválido para placa !");
-                        Console.ResetColor();
+                        ExibirMensagem("Padrão inválido para placa !","error");
                     }  
                 }
                 else{
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("A placa já foi cadastrada!");
-                    Console.ResetColor();
+                    ExibirMensagem("A placa já foi cadastrada!","error");
                 }
             }
 
@@ -68,9 +64,7 @@ namespace DesafioFundamentos.Models
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("não existem vagas do tipo Especial disponiveis");
-                        Console.ResetColor();
+                        ExibirMensagem("não existem vagas do tipo Especial disponiveis","warning");
                     }
                     op = false;
                     break;
@@ -84,17 +78,13 @@ namespace DesafioFundamentos.Models
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("não existem vagas do tipo comum disponiveis");
-                        Console.ResetColor();
+                        ExibirMensagem("não existem vagas do tipo comum disponiveis","warning");
                     }
                     op = false;
                     break;
                 }
                 else{
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("digite uma opção válida");
-                    Console.ResetColor();
+                    ExibirMensagem("digite uma opção válida","warning");
                     break;
                 }
                
@@ -137,16 +127,12 @@ namespace DesafioFundamentos.Models
                        veiculos.RemoveAt(i); 
                     }
                 }
-                
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine($"O veículo {placa} foi removido e o preço total foi de: R$ {valorTotal}");
-                Console.ResetColor();
+                ExibirMensagem($"O veículo {placa} foi removido e o preço total foi de {valorTotal:C}","success");
             }
             else
             {   
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
-                Console.ResetColor();
+                ExibirMensagem("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente",
+                "warning");
             }
         }
 
@@ -163,9 +149,8 @@ namespace DesafioFundamentos.Models
                 }
             }
             else
-            {   Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Não há veículos estacionados.");
-                Console.ResetColor();
+            {   
+                ExibirMensagem("Não há veículos estacionados.","error");
             }
         }
         //implementação mostrar numero de vagas restantes
@@ -209,9 +194,7 @@ namespace DesafioFundamentos.Models
                         }
                         finally
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Processo de gravação finalizado.");
-                            Console.ResetColor();
+                            ExibirMensagem("Processo de gravação finalizado.","success");
                         }
                         opcao = false;
                         break;
@@ -220,9 +203,7 @@ namespace DesafioFundamentos.Models
                         opcao = false;
                         break;
                     default:
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("Opção inválida !");
-                        Console.ResetColor();
+                        ExibirMensagem("Opção inválida !","warning");
                         break;                    
                 }
               
@@ -275,6 +256,31 @@ namespace DesafioFundamentos.Models
 
             // retorna verdadeiro caso qualquer um dos dois padrões seja atendido
             return Regex.IsMatch(placa,padraoPlacaBrasil) || Regex.IsMatch(placa,padraoPlacaMercosul);
+        }
+
+        private void ExibirMensagem(String mensagem, string tipoMensagem) {
+            switch (tipoMensagem)
+            {
+                case "warning":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(mensagem);
+                    Console.ResetColor();
+                    break;
+                case "error":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(mensagem);
+                    Console.ResetColor();
+                    break;
+                case "success":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(mensagem);
+                    Console.ResetColor();
+                    break;
+                default:
+                    break;
+            }
+
+
         }
     }
 }
