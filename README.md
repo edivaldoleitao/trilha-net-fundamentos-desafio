@@ -13,15 +13,18 @@ Este é um sistema simples de gestão de estacionamento em C# que permite cadast
 ## 🔧 Funcionalidades
 
 ### Cadastro de Veículos:  
-Permite adicionar novos veículos ao sistema de estacionamento.
+Permite adicionar novos veículos do tipo "Comum" e "Especial" ao sistema de estacionamento.
 ### Remoção de Veículos:  
-Remove veículos do sistema.
+Remove veículos do sistema após o cálculo de valor devido ao Estacionamento.
 ### Listagem de Veículos:  
- Exibe a lista de veículos cadastrados.
+Exibe a lista de veículos cadastrados.
 ### Mostrar Vagas e Preços:  
 Apresenta informações sobre as vagas disponíveis e os preços configurados.
 ### Gravar Dados:  
- Ao encerrar, grava os dados para preservar a última sessão.
+Ao encerrar,se for desejado, grava os dados para preservar a última sessão.
+### Carregar Dados:
+Ao iniciar o programa, carrega os dados do estacionamento da última sessão  
+salva, e inicializa o sistema com eles.
 ## 👉 Instruções de Uso
 ### Configuração Inicial:
 

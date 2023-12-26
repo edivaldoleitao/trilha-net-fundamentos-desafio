@@ -87,9 +87,7 @@ namespace DesafioFundamentos.Models
                     ExibirMensagem("digite uma opção válida","warning");
                     break;
                 }
-               
             }
-   
         }
         public void RemoverVeiculo()
         {
