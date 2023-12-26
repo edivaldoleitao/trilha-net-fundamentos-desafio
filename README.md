@@ -1,38 +1,58 @@
-# DIO - Trilha .NET - Fundamentos
-www.dio.me
+## Sistema de Estacionamento (DecolaTech4)🚀
+<p>
+    <a href="https://learn.microsoft.com/en-us/dotnet/csharp/">
+        <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white" />
+    </a>
+    <a href="https://learn.microsoft.com/pt-br/dotnet/">
+        <img src=" https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" />
+    </a>
+   
+</p>
 
-## Desafio de projeto
-Par este desafio, você precisará usar seus conhecimentos adquiridos no módulo de fundamentos, da trilha .NET da DIO.
+Este é um sistema simples de gestão de estacionamento em C# que permite cadastrar, remover e listar veículos, além de mostrar informações sobre vagas e preços. O sistema foi desenvolvido para ser executado em um console.
 
-## Contexto
-Você foi contratado para construir um sistema para um estacionamento, que será usado para gerenciar os veículos estacionados e realizar suas operações, como por exemplo adicionar um veículo, remover um veículo (e exibir o valor cobrado durante o período) e listar os veículos.
+##  ✔ Requisitos
 
-## Proposta
-Você precisará construir uma classe chamada "Estacionamento", conforme o diagrama abaixo:
-![Diagrama de classe estacionamento](diagrama_classe_estacionamento.png)
+- Plataforma: Este código foi desenvolvido em C# e requer um ambiente de desenvolvimento compatível com a linguagem.
+- Console de Comando: Para interagir com o sistema, é necessário um console de comando (CLI).
+## 🔧 Funcionalidades
 
-A classe contém três variáveis, sendo:
+### Cadastro de Veículos:  
+Permite adicionar novos veículos ao sistema de estacionamento.
+### Remoção de Veículos:  
+Remove veículos do sistema.
+### Listagem de Veículos:  
+ Exibe a lista de veículos cadastrados.
+### Mostrar Vagas e Preços:  
+Apresenta informações sobre as vagas disponíveis e os preços configurados.
+### Gravar Dados:  
+ Ao encerrar, grava os dados para preservar a última sessão.
+## 👉 Instruções de Uso
+### Configuração Inicial:
 
-**precoInicial**: Tipo decimal. É o preço cobrado para deixar seu veículo estacionado.
+Ao iniciar o programa, será solicitado que você forneça algumas informações:
+1. Preço inicial de estacionamento.
+2. Preço por hora.
+3. Limite de vagas comuns.
+4. Quantidade de vagas especiais.
 
-**precoPorHora**: Tipo decimal. É o preço por hora que o veículo permanecer estacionado.
+### Menu de Opções:
+O sistema oferece um menu com as seguintes opções:
 
-**veiculos**: É uma lista de string, representando uma coleção de veículos estacionados. Contém apenas a placa do veículo.
+1.  Cadastrar veículo.
+2.  Remover veículo.
+3.  Listar veículos.
+4.  Encerrar o programa.
+5.  Mostrar vagas e preços.
 
-A classe contém três métodos, sendo:
+## 🎈 Finalização:
 
-**AdicionarVeiculo**: Método responsável por receber uma placa digitada pelo usuário e guardar na variável **veiculos**.
+Ao encerrar o programa, os dados serão salvos automaticamente para a próxima sessão.
 
-**RemoverVeiculo**: Método responsável por verificar se um determinado veículo está estacionado, e caso positivo, irá pedir a quantidade de horas que ele permaneceu no estacionamento. Após isso, realiza o seguinte cálculo: **precoInicial** * **precoPorHora**, exibindo para o usuário.
-
-**ListarVeiculos**: Lista todos os veículos presentes atualmente no estacionamento. Caso não haja nenhum, exibir a mensagem "Não há veículos estacionados".
-
-Por último, deverá ser feito um menu interativo com as seguintes ações implementadas:
-1. Cadastrar veículo
-2. Remover veículo
-3. Listar veículos
-4. Encerrar
-
-
-## Solução
-O código está pela metade, e você deverá dar continuidade obedecendo as regras descritas acima, para que no final, tenhamos um programa funcional. Procure pela palavra comentada "TODO" no código, em seguida, implemente conforme as regras acima.
+## 👀 Observações  
+- O programa usa codificação UTF-8 para exibir corretamente caracteres especiais.
+## 👩‍💻 Execução do Programa  
+- Clone o repositório ou baixe o arquivo com o código fonte.  
+- Abra o arquivo no ambiente de desenvolvimento compatível com C#.  
+- Compile ```dotnet build``` e execute o código ```dotnet run```.  
+- Siga as instruções exibidas no console para interagir com o sistema.

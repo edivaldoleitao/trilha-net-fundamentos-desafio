@@ -11,7 +11,7 @@ namespace DesafioFundamentos.Models
         private List<Carro> veiculos = new List<Carro>();
         private int quantidadeVagas=0;
         private int quantidadeVagasEspeciais=0;
-        private const char comum = 'C';
+        private const char comum = 'C'; 
         private const char especial = 'E';
 
         public int QuantidadeVagas { get=> quantidadeVagas; }
@@ -24,14 +24,11 @@ namespace DesafioFundamentos.Models
             this.quantidadeVagas = quantidadeVagas;
             this.quantidadeVagasEspeciais = quantidadeVagasEspeciais;
         }
-
         public Estacionamento(){
 
         }
-
         public void AdicionarVeiculo()
         {
-
             bool op = true;
             string placa;
             while (true)
@@ -49,8 +46,7 @@ namespace DesafioFundamentos.Models
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Padrão inválido para placa !");
                         Console.ResetColor();
-                    }
-                    
+                    }  
                 }
                 else{
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -65,9 +61,6 @@ namespace DesafioFundamentos.Models
                 string opcao = Console.ReadLine();
                if (opcao.ToUpper().Equals("S"))
                {
-                
-                    
-
                     if(quantidadeVagasEspeciais > 0) 
                     {
                         quantidadeVagasEspeciais--;
@@ -83,7 +76,6 @@ namespace DesafioFundamentos.Models
                     break;
                }
                 else if(opcao.ToUpper().Equals("N")){
-                    
 
                     if(quantidadeVagas > 0) 
                     {
@@ -107,8 +99,7 @@ namespace DesafioFundamentos.Models
                 }
                
             }
-            
-            
+   
         }
         public void RemoverVeiculo()
         {
@@ -168,8 +159,7 @@ namespace DesafioFundamentos.Models
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
                 foreach (var carro in veiculos)
                 {
-                   string tipo = carro.TipoCarro.Equals(comum) ? "comum" : "especial";
-                   Console.WriteLine($" PLACA: {carro.Placa} - TIPO: {tipo}");
+                   Console.WriteLine(carro.ToString());
                 }
             }
             else
@@ -179,12 +169,9 @@ namespace DesafioFundamentos.Models
             }
         }
         //implementação mostrar numero de vagas restantes
-
         public void MostrarVagasEPrecos()
         {
-
             int vagasRestantes = quantidadeVagas;
-
             int vagasRestantesEspecial = quantidadeVagasEspeciais;
 
             Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);
@@ -273,7 +260,6 @@ namespace DesafioFundamentos.Models
                 Console.WriteLine("Exception" + e.Message);
             }
         }
-
         public bool ValidarPadraoPlaca(String placa)
         {
             //remove o caracter '-' e os espaços 

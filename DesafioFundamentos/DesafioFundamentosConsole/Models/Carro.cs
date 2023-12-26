@@ -16,9 +16,11 @@ namespace DesafioFundamentosConsole.Models
             this.tipoCarro = tipoCarro;
         }
 
-        public void toString() {
+        public override String ToString() {
 
-          Console.WriteLine("Placa: "+this.placa + "\nTipo Carro: "+this.tipoCarro);
+           String tipo = this.TipoCarro.Equals('C') ? "comum" : "especial";
+           String s = "Placa: "+this.placa + "\nTipo Carro: "+tipo;
+           return s;
         }
     }
 }
