@@ -1,5 +1,5 @@
 ﻿using DesafioFundamentos.Models;
-// adicioar limite de vagas, criar classe carro com placa e tipo idoso, e limitar as vagas especiais
+// adicionar limite de vagas, criar classe carro com placa e tipo idoso, e limitar as vagas especiais
 // Coloca o encoding para UTF8 para exibir acentuação
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
@@ -11,9 +11,8 @@ Estacionamento es;
 
 Console.WriteLine("Deseja carregar a última sessão ?\nS/N");
 
-if (Console.ReadLine().ToUpper().Equals("N"))
-{
-    
+if (Console.ReadLine().ToUpper().Equals("N") || ArquivoVazio())
+{ 
     Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
                     "Digite o preço inicial:");
 
@@ -89,7 +88,7 @@ while (exibirMenu)
 Console.WriteLine("O programa se encerrou");
 
 //tenta capturar um valor válido do decimal, enquanto não for, fica me loop
-static decimal ConverterDecimal() {
+decimal ConverterDecimal() {
 
     decimal valor;
     while(true) {
@@ -107,7 +106,7 @@ static decimal ConverterDecimal() {
 }
 
 //tenta capturar um valor válido do inteiro, enquanto não for, fica me loop
-static int ConverterInteiro() 
+int ConverterInteiro() 
 {
     int valor;
     while(true)
@@ -124,3 +123,19 @@ static int ConverterInteiro()
     }
     return valor;
 };
+
+bool ArquivoVazio()
+{
+    string[] array = Array.Empty<string>();
+    try
+    {
+        array = File.ReadAllLines("Arquivos//estacionamento.txt");
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+  
+    return array.Length == 0;
+}
+
