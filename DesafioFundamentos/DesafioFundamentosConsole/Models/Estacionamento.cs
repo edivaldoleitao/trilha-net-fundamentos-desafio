@@ -13,9 +13,9 @@ namespace DesafioFundamentos.Models
         private const char comum = 'C'; 
         private const char especial = 'E';
         private Dictionary<String,DateTime> registroHorarios = new Dictionary<String, DateTime>();
-
+        public decimal PrecoPorHora { get => precoPorHora; set => precoInicial = value; }
+        public decimal PrecoInicial { get =>precoInicial; set=> precoInicial = value; }
         public int QuantidadeVagas { get=> quantidadeVagas; }
-
         public int QuantidadeVagasEpeciais { get=> quantidadeVagasEspeciais; }
         public Estacionamento(decimal precoInicial, decimal precoPorHora, int quantidadeVagas, int quantidadeVagasEspeciais)
         {
