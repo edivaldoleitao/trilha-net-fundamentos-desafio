@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
-using DesafioFundamentosConsole.Models;
 
-namespace DesafioFundamentos.Models
+namespace DesafioFundamentosConsole.Models
 {
     public class Estacionamento
     {
