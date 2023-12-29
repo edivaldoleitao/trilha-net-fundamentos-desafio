@@ -1,5 +1,6 @@
 namespace TestesUnitarios;
 using DesafioFundamentosConsole.Models;
+using System;
 public class EstacionamentoTests
 {
     private Estacionamento es = new Estacionamento();
@@ -27,4 +28,18 @@ public class EstacionamentoTests
         result = es.ValidarPadraoPlaca(placa);
         Assert.True(result);
     }
+
+    [Fact]
+    public void CalcularPrecoDe1HoraComRetornoDeIgualA2()
+    {
+        DateTime horarioInicial = new DateTime(2023,01,01,11,00,00);
+        DateTime horarioFinal = new DateTime(2023,01,01,12,00,00);
+        decimal precoInicial = 1m;
+        decimal precoPorHora = 1m;
+
+        decimal result = es.CalcularTicketEstacionamento(horarioInicial, horarioFinal, precoInicial, precoPorHora);
+
+        Assert.Equal(result,2m);
+    }
+
 }
