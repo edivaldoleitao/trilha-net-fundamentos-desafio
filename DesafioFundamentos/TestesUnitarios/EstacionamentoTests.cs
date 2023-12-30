@@ -39,7 +39,7 @@ public class EstacionamentoTests
 
         decimal result = es.CalcularTicketEstacionamento(horarioInicial, horarioFinal, precoInicial, precoPorHora);
 
-        Assert.Equal(result,2m);
+        Assert.Equal(2m,result);
     }
 
 }
