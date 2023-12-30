@@ -251,7 +251,7 @@ namespace DesafioFundamentosConsole.Models
         public bool ValidarPadraoPlaca(String placa)
         {
             //remove o caracter '-' e os espaços 
-            placa = placa.Replace("-", "").Trim();
+            placa = Regex.Replace(placa, @"[-\s]", "");;
             // verifica se a placa está vazia
             if (String.IsNullOrEmpty(placa))
             {
