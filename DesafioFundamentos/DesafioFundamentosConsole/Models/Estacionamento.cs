@@ -4,24 +4,24 @@ namespace DesafioFundamentosConsole.Models
 {
     public class Estacionamento
     {
-        private decimal precoInicial = 0;
-        private decimal precoPorHora = 0;
-        private List<Carro> veiculos = new List<Carro>();
-        private int quantidadeVagas=0;
-        private int quantidadeVagasEspeciais=0;
+        private decimal _precoInicial = 0;
+        private decimal _precoPorHora = 0;
+        private List<Carro> _veiculos = new List<Carro>();
+        private int _quantidadeVagas=0;
+        private int _quantidadeVagasEspeciais=0;
         private const char comum = 'C'; 
         private const char especial = 'E';
-        private Dictionary<String,DateTime> registroHorarios = new Dictionary<String, DateTime>();
-        public decimal PrecoPorHora { get => precoPorHora; set => precoInicial = value; }
-        public decimal PrecoInicial { get =>precoInicial; set=> precoInicial = value; }
-        public int QuantidadeVagas { get=> quantidadeVagas; }
-        public int QuantidadeVagasEpeciais { get=> quantidadeVagasEspeciais; }
+        private Dictionary<String,DateTime> _registroHorarios = new Dictionary<String, DateTime>();
+        public decimal PrecoPorHora { get => _precoPorHora; set => _precoInicial = value; }
+        public decimal PrecoInicial { get =>_precoInicial; set=> _precoInicial = value; }
+        public int QuantidadeVagas { get=> _quantidadeVagas; }
+        public int QuantidadeVagasEpeciais { get=> _quantidadeVagasEspeciais; }
         public Estacionamento(decimal precoInicial, decimal precoPorHora, int quantidadeVagas, int quantidadeVagasEspeciais)
         {
-            this.precoInicial = precoInicial;
-            this.precoPorHora = precoPorHora;
-            this.quantidadeVagas = quantidadeVagas;
-            this.quantidadeVagasEspeciais = quantidadeVagasEspeciais;
+            this._precoInicial = precoInicial;
+            this._precoPorHora = precoPorHora;
+            this._quantidadeVagas = quantidadeVagas;
+            this._quantidadeVagasEspeciais = quantidadeVagasEspeciais;
         }
         public Estacionamento(){
 
@@ -35,7 +35,7 @@ namespace DesafioFundamentosConsole.Models
                 Console.WriteLine("Digite a placa do veículo para estacionar:");
                 placa = Console.ReadLine();
                 //verifica se existe a mesma placa cadastrada no sistema
-                if (!veiculos.Any(x => x.Placa.ToUpper() == placa.ToUpper()))
+                if (!_veiculos.Any(x => x.Placa.ToUpper() == placa.ToUpper()))
                 {
                     if(ValidarPadraoPlaca(placa))
                     {
@@ -56,11 +56,11 @@ namespace DesafioFundamentosConsole.Models
                 string opcao = Console.ReadLine();
                if (opcao.ToUpper().Equals("S"))
                {
-                    if(quantidadeVagasEspeciais > 0) 
+                    if(_quantidadeVagasEspeciais > 0) 
                     {
-                        quantidadeVagasEspeciais--;
-                        veiculos.Add(new Carro(placa,especial));
-                        registroHorarios.Add(placa,DateTime.Now);
+                        _quantidadeVagasEspeciais--;
+                        _veiculos.Add(new Carro(placa,especial));
+                        _registroHorarios.Add(placa,DateTime.Now);
                     }
                     else
                     {
@@ -71,11 +71,11 @@ namespace DesafioFundamentosConsole.Models
                }
                 else if(opcao.ToUpper().Equals("N")){
 
-                    if(quantidadeVagas > 0) 
+                    if(_quantidadeVagas > 0) 
                     {
-                        quantidadeVagas--;
-                        veiculos.Add(new Carro(placa,comum));
-                        registroHorarios.Add(placa, DateTime.Now);
+                        _quantidadeVagas--;
+                        _veiculos.Add(new Carro(placa,comum));
+                        _registroHorarios.Add(placa, DateTime.Now);
                     }
                     else
                     {
@@ -100,32 +100,32 @@ namespace DesafioFundamentosConsole.Models
             placa = Console.ReadLine();
 
             // Verifica se o veículo existe
-            if (veiculos.Any(x => x.Placa.ToUpper() == placa.ToUpper()))
+            if (_veiculos.Any(x => x.Placa.ToUpper() == placa.ToUpper()))
             {
                 Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
 
                 // o metodo recebe o horario atual do sistema para saida, horario do registro da placa
                 // preco inicial e preco por hora
-                decimal valorTotal = CalcularTicketEstacionamento(registroHorarios[placa], DateTime.Now,
-                precoInicial, precoPorHora);
+                decimal valorTotal = CalcularTicketEstacionamento(_registroHorarios[placa], DateTime.Now,
+                _precoInicial, _precoPorHora);
 
                 // TODO: Remover a placa digitada da lista de veículos
-                for(int i=0; i < veiculos.Count; i++)
+                for(int i=0; i < _veiculos.Count; i++)
                 {
-                    if (veiculos[i].Placa.Equals(placa))
+                    if (_veiculos[i].Placa.Equals(placa))
                     {
-                       if (veiculos[i].TipoCarro.Equals(comum))
+                       if (_veiculos[i].TipoCarro.Equals(comum))
                         {
-                            quantidadeVagas++;
+                            _quantidadeVagas++;
                         }
                        else
                         {
-                            quantidadeVagasEspeciais++;
+                            _quantidadeVagasEspeciais++;
                             valorTotal *= 0.8m; // desconto pela mobilidade do usuário
                         }
-                        horarioEntrada = registroHorarios[veiculos[i].Placa];
-                        registroHorarios.Remove(veiculos[i].Placa);                    
-                        veiculos.RemoveAt(i);
+                        horarioEntrada = _registroHorarios[_veiculos[i].Placa];
+                        _registroHorarios.Remove(_veiculos[i].Placa);                    
+                        _veiculos.RemoveAt(i);
                        
                     }
                 }
@@ -142,15 +142,15 @@ namespace DesafioFundamentosConsole.Models
         public void ListarVeiculos()
         {
             // Verifica se há veículos no estacionamento
-            if (veiculos.Any())
+            if (_veiculos.Any())
             {
                 Console.WriteLine("Os veículos estacionados são:");
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
-                foreach (var carro in veiculos)
+                foreach (var carro in _veiculos)
                 {
                    Console.WriteLine("==================================");
                    Console.WriteLine(carro.ToString());
-                   Console.WriteLine($"Horário Entrada: {registroHorarios[carro.Placa]}");
+                   Console.WriteLine($"Horário Entrada: {_registroHorarios[carro.Placa]}");
                    Console.WriteLine("==================================");
                 }
             }
@@ -162,11 +162,11 @@ namespace DesafioFundamentosConsole.Models
         //implementação mostrar numero de vagas restantes
         public void MostrarVagasEPrecos()
         {
-            int vagasRestantes = quantidadeVagas;
-            int vagasRestantesEspecial = quantidadeVagasEspeciais;
+            int vagasRestantes = _quantidadeVagas;
+            int vagasRestantesEspecial = _quantidadeVagasEspeciais;
 
             Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);
-            Console.WriteLine($"Preço inicial: {precoInicial:C}\nPreço por Hora: {precoPorHora:C}");   
+            Console.WriteLine($"Preço inicial: {_precoInicial:C}\nPreço por Hora: {_precoPorHora:C}");   
         }
 
         public void GravarDados()
@@ -184,13 +184,13 @@ namespace DesafioFundamentosConsole.Models
                             StreamWriter sw = new StreamWriter("Arquivos//estacionamento.txt");
                             
                             //grava os dados sobre as vagas
-                            sw.WriteLine(quantidadeVagas+"|"+quantidadeVagasEspeciais);
+                            sw.WriteLine(_quantidadeVagas+"|"+_quantidadeVagasEspeciais);
                             // grava os dados dos preços
-                            sw.WriteLine(precoInicial+"|"+precoPorHora);
+                            sw.WriteLine(_precoInicial+"|"+_precoPorHora);
                             // grava os dados dos carros
-                            foreach (var carro in veiculos)
+                            foreach (var carro in _veiculos)
                             {
-                                DateTime horario = registroHorarios[carro.Placa];
+                                DateTime horario = _registroHorarios[carro.Placa];
                                 sw.WriteLine(carro.Placa + "|" + carro.TipoCarro + "|" + horario); 
                             }     
                             sw.Close();
@@ -226,21 +226,21 @@ namespace DesafioFundamentosConsole.Models
                     char tipoCarro = auxiliar[1][0];
                     DateTime horario = Convert.ToDateTime(auxiliar[2]);
 
-                    registroHorarios.Add(placa,horario);
-                    veiculos.Add(new Carro(placa, tipoCarro));
+                    _registroHorarios.Add(placa,horario);
+                    _veiculos.Add(new Carro(placa, tipoCarro));
                 }
                 
                 //carrega a primeira linha do arquivo com as vagas
                 string[] vagas = array[0].Split('|');
 
-                quantidadeVagas = Convert.ToInt32(vagas[0]);
-                quantidadeVagasEspeciais = Convert.ToInt32(vagas[1]);
+                _quantidadeVagas = Convert.ToInt32(vagas[0]);
+                _quantidadeVagasEspeciais = Convert.ToInt32(vagas[1]);
 
                 // carrega segunda linha para os preços
                 string[] precos = array[1].Split('|');
 
-                precoInicial = Convert.ToInt32(precos[0]);
-                precoPorHora = Convert.ToInt32(precos[1]);
+                _precoInicial = Convert.ToInt32(precos[0]);
+                _precoPorHora = Convert.ToInt32(precos[1]);
 
             }
             catch (Exception e)
@@ -289,10 +289,10 @@ namespace DesafioFundamentosConsole.Models
         }
         // metodo que calcula o valor devido a partir do tempo decorrido
         public decimal CalcularTicketEstacionamento(DateTime horarioInicial, DateTime horarioFinal,
-         decimal precoInicial, decimal precoHora) 
+         decimal _precoInicial, decimal precoHora) 
         {
             double horas = (horarioFinal - horarioInicial).TotalHours; 
-            decimal result = precoInicial + precoHora*(decimal)horas; 
+            decimal result = _precoInicial + precoHora*(decimal)horas; 
             return result;
         }
     }

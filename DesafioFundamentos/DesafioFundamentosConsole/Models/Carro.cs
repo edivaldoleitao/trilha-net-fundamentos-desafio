@@ -7,19 +7,19 @@ namespace DesafioFundamentosConsole.Models
 {
     public class Carro
     {
-        private string placa;
-        private char tipoCarro;
-        public string Placa { get=>placa; }
-        public char TipoCarro { get=>tipoCarro;}
-        public Carro(string placa, char tipoCarro) {
-            this.placa = placa;
-            this.tipoCarro = tipoCarro;
+        private string _placa;
+        private char _tipoCarro;
+        public string Placa { get=>_placa; }
+        public char TipoCarro { get=>_tipoCarro;}
+        public Carro(string _placa, char _tipoCarro) {
+            this._placa = _placa;
+            this._tipoCarro = _tipoCarro;
         }
 
         public override String ToString() {
 
            String tipo = this.TipoCarro.Equals('C') ? "comum" : "especial";
-           String s = "Placa: "+this.placa + "\nTipo Carro: "+tipo;
+           String s = "Placa: "+this._placa + "\nTipo Carro: "+tipo;
            return s;
         }
     }
