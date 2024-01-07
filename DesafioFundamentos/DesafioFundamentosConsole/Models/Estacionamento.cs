@@ -97,6 +97,7 @@ namespace DesafioFundamentosConsole.Models
             // Pedir para o usuário digitar a placa e armazenar na variável placa
             string placa = "";
             DateTime horarioEntrada = new DateTime();
+            DateTime horarioSaida = DateTime.Now;
             placa = Console.ReadLine();
 
             // Verifica se o veículo existe
@@ -104,7 +105,7 @@ namespace DesafioFundamentosConsole.Models
             {
                 // o metodo recebe o horario atual do sistema para saida, horario do registro da placa
                 // preco inicial e preco por hora
-                decimal valorTotal = CalcularTicketEstacionamento(_registroHorarios[placa], DateTime.Now,
+                decimal valorTotal = CalcularTicketEstacionamento(_registroHorarios[placa], horarioSaida,
                 _precoInicial, _precoPorHora);
 
                 // TODO: Remover a placa digitada da lista de veículos
@@ -119,7 +120,6 @@ namespace DesafioFundamentosConsole.Models
                        else
                         {
                             _quantidadeVagasEspeciais++;
-                            valorTotal *= 0.8m; // desconto pela mobilidade do usuário
                         }
                         horarioEntrada = _registroHorarios[_veiculos[i].Placa];
                         _registroHorarios.Remove(_veiculos[i].Placa);                    
@@ -128,7 +128,7 @@ namespace DesafioFundamentosConsole.Models
                     }
                 }
                 ExibirMensagem($"O veículo {placa} foi removido e o preço total foi de {valorTotal:C}","success");
-                ExibirMensagem($"Horário Entrada veículo: {horarioEntrada}\nHorário saída : {DateTime.Now}", "success");
+                ExibirMensagem($"Horário Entrada veículo: {horarioEntrada}\nHorário saída : {horarioSaida}", "success");
             }
             else
             {   
