@@ -9,7 +9,7 @@ namespace DesafioFundamentosConsole.Models
         private List<Carro> _veiculos = new List<Carro>();
         private int _quantidadeVagas=0;
         private int _quantidadeVagasEspeciais=0;
-        private const char comum = 'C'; 
+        private const char comum = 'C';
         private const char especial = 'E';
         private Dictionary<String,DateTime> _registroHorarios = new Dictionary<String, DateTime>();
         public decimal PrecoPorHora { get => _precoPorHora; set => _precoInicial = value; }
@@ -102,8 +102,6 @@ namespace DesafioFundamentosConsole.Models
             // Verifica se o veículo existe
             if (_veiculos.Any(x => x.Placa.ToUpper() == placa.ToUpper()))
             {
-                Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
-
                 // o metodo recebe o horario atual do sistema para saida, horario do registro da placa
                 // preco inicial e preco por hora
                 decimal valorTotal = CalcularTicketEstacionamento(_registroHorarios[placa], DateTime.Now,
