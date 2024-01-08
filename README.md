@@ -45,7 +45,7 @@ O sistema oferece um menu com as seguintes opções:
 
 ## 🎈 Finalização:
 
-Ao encerrar o programa, os dados serão salvos automaticamente para a próxima sessão.
+Ao encerrar o programa, se desejar os dados serão salvos para a próxima sessão.
 
 ## 👀 Observações  
 - O programa usa codificação UTF-8 para exibir corretamente caracteres especiais.
