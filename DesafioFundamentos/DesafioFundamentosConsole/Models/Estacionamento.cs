@@ -160,10 +160,7 @@ namespace DesafioFundamentosConsole.Models
         //implementação mostrar numero de vagas restantes
         public void MostrarVagasEPrecos()
         {
-            int vagasRestantes = _quantidadeVagas;
-            int vagasRestantesEspecial = _quantidadeVagasEspeciais;
-
-            Console.WriteLine("Vagas comuns disponiveis: "+ vagasRestantes + "\nVagas Especiais: "+ vagasRestantesEspecial);
+            Console.WriteLine("Vagas comuns disponiveis: "+ _quantidadeVagas + "\nVagas Especiais: "+ _quantidadeVagasEspeciais);
             Console.WriteLine($"Preço inicial: {_precoInicial:C}\nPreço por Hora: {_precoPorHora:C}");   
         }
 
