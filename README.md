@@ -13,11 +13,11 @@ Este é um sistema simples de gestão de estacionamento em C# que permite cadast
 ## 🔧 Funcionalidades
 
 ### Cadastro de Veículos:  
-Permite adicionar novos veículos do tipo "Comum" e "Especial" ao sistema de estacionamento.
+Permite adicionar novos veículos do tipo "Comum" e "Especial" ao sistema de estacionamento, considerando os padrões de placa existentes no brasil.
 ### Remoção de Veículos:  
-Remove veículos do sistema após o cálculo de valor devido ao Estacionamento.
+Remove veículos do sistema após o cálculo de valor devido ao Estacionamento considerando horário de entrada e saída.
 ### Listagem de Veículos:  
-Exibe a lista de veículos cadastrados.
+Exibe a lista de veículos cadastrados e seu horário de entrada.
 ### Mostrar Vagas e Preços:  
 Apresenta informações sobre as vagas disponíveis e os preços configurados.
 ### Gravar Dados:  
@@ -45,12 +45,12 @@ O sistema oferece um menu com as seguintes opções:
 
 ## 🎈 Finalização:
 
-Ao encerrar o programa, os dados serão salvos automaticamente para a próxima sessão.
+Ao encerrar o programa, se desejar os dados serão salvos para a próxima sessão.
 
 ## 👀 Observações  
 - O programa usa codificação UTF-8 para exibir corretamente caracteres especiais.
 ## 👩‍💻 Execução do Programa  
-- Clone o repositório ou baixe o arquivo com o código fonte.  
-- Abra o arquivo no ambiente de desenvolvimento compatível com C#.  
+- Clone o repositório ou baixe o arquivo com o código fonte com o comando ```git clone <URL>```.  
+- Navegue para pasta **DesafioFundamentosConsole** no ambiente de desenvolvimento compatível com C#.  
 - Compile ```dotnet build``` e execute o código ```dotnet run```.  
 - Siga as instruções exibidas no console para interagir com o sistema.
