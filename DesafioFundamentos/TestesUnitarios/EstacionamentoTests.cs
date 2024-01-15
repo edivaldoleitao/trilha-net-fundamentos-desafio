@@ -32,6 +32,8 @@ public class EstacionamentoTests
     [Fact]
     public void CalcularPrecoDe1HoraComRetornoDeIgualA2()
     {
+        // inicializando das datas com diferença de 1 hora do mesmo dia e valor inicial 
+        //e preco por hora iguais a 1 sendo o calculo (precoInicial(1) + precoProHora(1)*Intervaldo de tempo(1)) = 2
         DateTime horarioInicial = new DateTime(2023,01,01,11,00,00);
         DateTime horarioFinal = new DateTime(2023,01,01,12,00,00);
         decimal precoInicial = 1m;
